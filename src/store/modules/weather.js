@@ -1,3 +1,5 @@
+/* eslint-disable no-eval */
+
 import axios from 'axios';
 
 const headersJsonAuth = {
@@ -52,9 +54,6 @@ const actions = {
         .then(resp => {
           commit('SET_WEATHER_INFO', resp.data.list);
           commit('SET_LOADING', false);
-
-          console.log(resp.request);
-
           resolve();
         })
         .catch(err => {

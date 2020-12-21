@@ -5,7 +5,7 @@
     <label for="city-name">
       City Name
     </label>
-    <b-form-input v-model="city"
+    <b-form-input v-model="city_"
                   @focus="onFocus"
                   @blur="onBlur"
                   @keypress.enter="onKeypressEnter"
@@ -30,13 +30,20 @@
     name: 'WeatherInfo',
     data: () => ({
       focus: false,
-      city: '',
     }),
     computed: {
       ...mapGetters('Weather', [
         'getCityName',
         'getQueryRef'
       ]),
+      city_: {
+        get() {
+          return this.getCityName;
+        },
+        set(v) {
+          this.setCityName(v);
+        },
+      },
     },
     methods: {
       ...mapMutations('Weather', {
@@ -55,17 +62,13 @@
         $event.target.blur();
       },
       submitForm() {
-        console.log('submitForm', this.city);
-        if (this.city !== '') {
-          this.setCityName(this.city);
-          this.getWeatherInfo()
-            .then(() => {
-              this.$router.replace({query: {city: this.city}});
-            })
-            .catch(() => {
-              this.$toasted.error('City not found').goAway(3500);
-            });
-        }
+        this.getWeatherInfo()
+          .then(() => {
+            this.$router.replace({query: {city: this.city_}});
+          })
+          .catch(() => {
+            this.$toasted.error('City not found').goAway(3500);
+          });
       },
     },
   };

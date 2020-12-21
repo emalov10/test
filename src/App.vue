@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <preloader v-if="isLoading === true"/>
     <weather-info/>
   </div>
 </template>
@@ -13,7 +12,6 @@
 
   export default {
     name: 'App',
-    router: '/',
     components: {
       WeatherInfo,
       Preloader,

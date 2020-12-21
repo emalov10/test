@@ -1,14 +1,15 @@
+/* eslint-disable no-eval */
 import Vue from 'vue';
 import App from './App';
 import router from './router';
 import {store} from './store';
 
-import Toasted from 'vue-toasted'
+import Toasted from 'vue-toasted';
 
-Vue.use(Toasted, Option)
+Vue.use(Toasted, Option);
 
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 import {FormPlugin} from 'bootstrap-vue';
 import {InputGroupPlugin} from 'bootstrap-vue';

@@ -3,20 +3,24 @@
     <section class="row">
       <weather-info-form class="col-6 card p-4"/>
     </section>
-    <weather-info-list v-if="weatherInfoData.length > 1"
-                       class="mt-3 row"
+    <preloader v-if="isLoading === true"
+               class="text-center"
     />
-    <h3 v-else
-        class="row justify-content-center mt-5"
-    >
-      N/D
-    </h3>
+    <div v-else>
+      <weather-info-list v-if="weatherInfoData.length > 1"
+                         class="mt-3 row"
+      />
+      <h3 class="row justify-content-center mt-5">
+        N/D
+      </h3>
+    </div>
   </div>
 </template>
 
 <script>
   import WeatherInfoForm from '../weather/WeatherInfoForm';
   import WeatherInfoList from './WeatherInfoList';
+  import Preloader from '../elements/Preloader';
 
   import {mapActions, mapGetters, mapMutations} from 'vuex';
 
@@ -25,13 +29,15 @@
     components: {
       WeatherInfoForm,
       WeatherInfoList,
+      Preloader,
     },
     computed: {
       ...mapGetters('Weather', [
         'weatherInfoData',
+        'isLoading',
       ]),
     },
-    created() {
+    mounted() {
       if (this.$route.query.city !== undefined) {
         this.setCityName(this.$route.query.city);
         this.getWeatherInfo();
